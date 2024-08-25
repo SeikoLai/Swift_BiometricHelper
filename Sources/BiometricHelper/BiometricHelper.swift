@@ -51,7 +51,7 @@ open class BiometricHelper: ObservableObject {
     @Published public private(set) var isAvailable: Bool = false
     
     /// Flag to indicate if an error has occurred
-    @Published public private(set) var hasError: Bool = false
+    @Published public var hasError: Bool = false
     
     /// The error that occurred during authentication, if any
     @Published public private(set) var error: LAError?
