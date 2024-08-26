@@ -44,16 +44,16 @@ private actor BiometricContextManager {
 @MainActor
 open class BiometricHelper: ObservableObject {
     /// Type of biometric authentication available on the device
-    @Published public private(set) var type: LABiometryType = .none
+    @Published public var type: LABiometryType = .none
     
     /// Flag to indicate if biometric authentication is available
-    @Published public private(set) var isAvailable: Bool = false
+    @Published public var isAvailable: Bool = false
     
     /// Flag to indicate if an error has occurred
     @Published public var hasError: Bool = false
     
     /// The error that occurred during authentication, if any
-    @Published public private(set) var error: LAError?
+    @Published public  var error: LAError?
     
     /// Computed property to get the localized description of the error
     public var errorDescription: String? {
@@ -100,7 +100,7 @@ open class BiometricHelper: ObservableObject {
     
     /// Perform biometric authentication
     /// - Returns: A boolean indicating whether authentication was successful
-    open func authenticate() async -> Bool {
+    public func authenticate() async -> Bool {
         do {
             // Hide "Enter Password" button
             await contextManager.setLocalizedFallbackTitle("")
