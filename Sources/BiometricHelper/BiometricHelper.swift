@@ -5,13 +5,9 @@ import LocalAuthentication
 
 /// Actor to manage thread-safe access to LAContext
 private actor BiometricContextManager {
-    let context: LAContext
-    
-    init() {
-        self.context = LAContext()
-    }
     
     func canEvaluatePolicy(_ policy: LAPolicy) throws -> Bool {
+        let context: LAContext = .init()
         var error: NSError?
         let canEvaluate = context.canEvaluatePolicy(policy, error: &error)
         if let error = error {
@@ -21,10 +17,12 @@ private actor BiometricContextManager {
     }
     
     func biometryType() -> LABiometryType {
+        let context: LAContext = .init()
         return context.biometryType
     }
     
     func evaluatePolicy(_ policy: LAPolicy, localizedReason: String) async throws -> Bool {
+        let context: LAContext = .init()
         return try await withCheckedThrowingContinuation { continuation in
             context.evaluatePolicy(policy, localizedReason: localizedReason) { success, error in
                 if let error = error {
@@ -37,6 +35,7 @@ private actor BiometricContextManager {
     }
     
     func setLocalizedFallbackTitle(_ title: String?) {
+        let context: LAContext = .init()
         context.localizedFallbackTitle = title
     }
 }
